@@ -30,6 +30,7 @@ const pqrsdOptions = [
   { type: 'Denuncia', icon: <FaQuestionCircle /> , value: 5},
 ];
 
+
 export const PqrsdView = () => {
   const [form] = Form.useForm();
 
