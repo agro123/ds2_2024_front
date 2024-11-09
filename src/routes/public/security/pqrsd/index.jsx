@@ -1,5 +1,4 @@
 // PqrsForm.jsx
-import React from 'react';
 import {
   Form,
   Input,
@@ -16,7 +15,6 @@ import {
   FaInfoCircle,
   FaQuestionCircle,
 } from 'react-icons/fa';
-import axios from 'axios';
 import '../../../../assets/styles/pqrsd.css';
 
 const { Title } = Typography;
