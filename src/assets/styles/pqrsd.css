@@ -1,0 +1,53 @@
+.pqrs-form-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pqrs-radio-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .pqrs-radio-button:hover {
+    background-color: #e6f7ff;
+  }
+
+  #pqrs_form_type_pqrsd {
+    display: flex;
+    width: 100%;
+  }
+  
+  .pqrs-icon {
+    font-size: 1rem;
+    color: #1890ff; /* Color azul de Ant Design */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .pqrs-icon svg{
+    margin-right: 6px;
+  }
+  
+  @media (max-width: 768px) {
+    .pqrs-form-container {
+      padding: 20px;
+      margin: 20px;
+    }
+  
+    .pqrs-radio-button {
+      font-size: 14px;
+      padding: 6px 12px;
+    }
+  
+    .pqrs-icon {
+      font-size: 1rem;
+    }
+  }
