@@ -1,5 +1,5 @@
 // LoginView.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Form, Input, Button, Typography, message } from 'antd';
 import { FaUser, FaLock} from 'react-icons/fa';
 import '../../../../assets/styles/login.css';
