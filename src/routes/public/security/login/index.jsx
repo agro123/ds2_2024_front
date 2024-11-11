@@ -15,7 +15,7 @@ export const LoginView = () => {
     setLoading(true);
     try {
     
-      const response = await axios.post('http://localhost:3000/api/public/users/login/', {
+      const response = await axios.post('https://ds2-2024-api-v1ea.onrender.com/api/public/users/login/', {
         username: values.username,
         password: values.password,
       });
