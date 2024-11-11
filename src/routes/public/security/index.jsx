@@ -10,8 +10,7 @@ const SecurityRouter = () => {
         <Routes>
             <Route path='/login' element={<LoginView />} />
             <Route path='/pqrsd/' element={<PqrsdView />} />
-            {/* {/* <Route path='/forgotpassword' element={<ForogotPasswordView />} /> */}
-            <Route path="*" element={<Navigate to="/login" />} /> 
+            <Route path="*" element={<Navigate to="/pqrsd" />} /> 
         </Routes>
 
     )
