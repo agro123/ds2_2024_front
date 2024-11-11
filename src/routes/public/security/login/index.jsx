@@ -1,7 +1,7 @@
 // LoginView.jsx
 import React, { useState } from 'react';
-import { Form, Input, Button, Checkbox, Typography, message } from 'antd';
-import { FaUser, FaLock, FaFacebookF, FaGoogle, FaTwitter } from 'react-icons/fa';
+import { Form, Input, Button, Typography, message } from 'antd';
+import { FaUser, FaLock} from 'react-icons/fa';
 import '../../../../assets/styles/login.css';
 import axios from 'axios';
 import logo from '../../../../../public/logo1.png';
@@ -24,7 +24,7 @@ export const LoginView = () => {
       console.log('Respuesta del servidor:', response.data);
 
       // window.location.href = '/dashboard';
-      
+
     } catch (error) {
       setLoading(false);
       if (error.response && error.response.status === 401) {
