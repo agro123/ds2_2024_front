@@ -1,8 +1,9 @@
 // LoginView.jsx
-import React, { useState } from 'react';
-import { Form, Input, Button, Checkbox, Typography, message } from 'antd';
-import { FaUser, FaLock, FaFacebookF, FaGoogle, FaTwitter } from 'react-icons/fa';
+import { useState } from 'react';
+import { Form, Input, Button, Typography, message } from 'antd';
+import { FaUser, FaLock} from 'react-icons/fa';
 import '../../../../assets/styles/login.css';
+import axios from 'axios';
 import logo from '../../../../../public/logo1.png';
 
 const { Title } = Typography;
@@ -10,14 +11,31 @@ const { Title } = Typography;
 export const LoginView = () => {
   const [loading, setLoading] = useState(false);
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     setLoading(true);
-    // Simulación de autenticación
-    setTimeout(() => {
-      setLoading(false);
+    try {
+    
+      const response = await axios.post('http://localhost:3000/api/public/users/login/', {
+        username: values.username,
+        password: values.password,
+      });
+
       message.success('¡Inicio de sesión exitoso!');
-      console.log('Datos del formulario:', values);
-    }, 2000);
+      console.log('Respuesta del servidor:', response.data);
+
+      // window.location.href = '/dashboard';
+
+    } catch (error) {
+      setLoading(false);
+      if (error.response && error.response.status === 401) {
+        message.error('Usuario o contraseña incorrectos.');
+      } else {
+        message.error('Error al iniciar sesión. Intenta nuevamente.');
+      }
+      console.error('Error al iniciar sesión:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
