@@ -61,7 +61,7 @@ export const PqrsdView = () => {
           label="Tipo de PQRS"
           rules={[{ required: true, message: 'Por favor, selecciona un tipo de PQRS!' }]}
         >
-          <Radio.Group>
+          <Radio.Group aria-label="Tipo de PQRS" role="group">
             {pqrsdOptions.map((option) => (
               <Radio.Button
                 key={option.type}
