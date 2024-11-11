@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import SecurityRouter from './security'
 
-
 const PublicRouter = () => {
 
     return (
