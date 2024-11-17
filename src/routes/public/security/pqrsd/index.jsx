@@ -16,6 +16,7 @@ import {
   FaQuestionCircle,
 } from 'react-icons/fa';
 import '../../../../assets/styles/pqrsd.css';
+import axios from 'axios';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -28,13 +29,19 @@ const pqrsdOptions = [
   { type: 'Denuncia', icon: <FaQuestionCircle /> , value: 5},
 ];
 
-
 export const PqrsdView = () => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    
-    console.log(values)
+    values.number_document = parseInt(values.number_document)
+    try {
+      await axios.post('http://localhost:3000/api/public/pqrsd/', values);
+      message.success('Se ha agregado correctamente.');
+      form.resetFields();
+    } catch (error) {
+      console.error(error)
+      message.error('Error al agregar la PQRSD.');
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
