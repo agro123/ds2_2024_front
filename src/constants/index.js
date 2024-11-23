@@ -16,3 +16,5 @@ export const TYPE_DOCUMENTS = {
   2: 'Pasaporte',
   3: 'Otro',
 };
+
+export const API_URL = localStorage.getItem('debug') == 'true' ? 'http://localhost:3000/api/public/' : 'https://ds2-2024-api-v1ea.onrender.com/api/public/'

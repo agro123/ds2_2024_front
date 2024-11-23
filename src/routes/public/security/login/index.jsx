@@ -5,6 +5,7 @@ import { FaUser, FaLock} from 'react-icons/fa';
 import '../../../../assets/styles/login.css';
 import axios from 'axios';
 import logo from '../../../../../public/logo1.png';
+import { API_URL } from '../../../../constants';
 
 const { Title } = Typography;
 
@@ -15,7 +16,7 @@ export const LoginView = () => {
     setLoading(true);
     try {
     
-      const response = await axios.post('https://ds2-2024-api-v1ea.onrender.com/api/public/users/login/', {
+      const response = await axios.post(API_URL + 'users/login/', {
         username: values.username,
         password: values.password,
       });

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Table, message, Button, Modal, Form, Input, Space, Select } from 'antd';
 import axios from 'axios';
+import { API_URL } from '../../../constants';
 
 export const UsersList = () => {
   const [users, setUsers] = useState([]);
@@ -41,7 +42,7 @@ export const UsersList = () => {
       const response = await axios.get('https://ds2-2024-api-v1ea.onrender.com/api/public/users/');
       setUsers(response.data);
     } catch (error) {
-      message.error('Error al cargar los usuarios.');
+      message.error('Error al cargar los usuarios.',error?.message);
     } finally {
       setLoading(false);
     }
@@ -69,7 +70,7 @@ export const UsersList = () => {
   const handleAddUser = async (values) => {
     const currentDate = new Date().toISOString();
     try {
-      const response = await axios.post('https://ds2-2024-api-v1ea.onrender.com/api/public/users/', {
+      const response = await axios.post(API_URL + 'users/', {
         ...values,
         created_by: 'Sebastian Rey',
         created_at: currentDate,
@@ -79,7 +80,7 @@ export const UsersList = () => {
       getUsers()
       setIsAddModalVisible(false);
     } catch (error) {
-      message.error('Error al agregar usuario.');
+      message.error('Error al agregar usuario.', error?.message);
     }
   };
 
@@ -98,7 +99,7 @@ export const UsersList = () => {
 
   const handleEditUser = async (values) => {
     try {
-      await axios.put(`https://ds2-2024-api-v1ea.onrender.com/api/public/users/${editingUser.id}`, {
+      await axios.put(API_URL + `users/${editingUser.id}`, {
         ...values,
         created_by: values.created_by.label,
       });
@@ -107,17 +108,17 @@ export const UsersList = () => {
       setIsEditModalVisible(false);
       setEditingUser(null);
     } catch (error) {
-      message.error('Error al actualizar usuario.');
+      message.error('Error al actualizar usuario.', error?.message);
     }
   };
 
   const handleDeleteUser = async (userId) => {
     try {
-      await axios.delete(`https://ds2-2024-api-v1ea.onrender.com/api/public/users/${userId}`);
+      await axios.delete(API_URL + `users/${userId}`);
       getUsers()
       message.success('Usuario eliminado exitosamente.');
     } catch (error) {
-      message.error('Error al eliminar usuario.');
+      message.error('Error al eliminar usuario.', error?.message);
     }
   };
 

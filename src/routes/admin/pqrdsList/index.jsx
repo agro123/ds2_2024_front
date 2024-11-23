@@ -2,10 +2,7 @@ import { useState, useEffect } from 'react';
 import { Table, message, Button, Modal, Space } from 'antd';
 import axios from 'axios';
 
-import { STATUS_LABELS, TYPE_PQRSD_LABELS, TYPE_DOCUMENTS } from '../../../constants';
-
-const productionUrl = 'https://ds2-2024-api-v1ea.onrender.com/api/public/'
-const developUrl = 'http://localhost:3000/api/public/'
+import { STATUS_LABELS, TYPE_PQRSD_LABELS, TYPE_DOCUMENTS, API_URL } from '../../../constants';
 
 export const PqrsdList = () => {
   const [pqrsd, setPqrsd] = useState([]);
@@ -41,10 +38,10 @@ export const PqrsdList = () => {
   const getPqrsd = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(developUrl + 'pqrsd/');
+      const response = await axios.get(API_URL + 'pqrsd/');
       setPqrsd(response.data);
     } catch (error) {
-      message.error('Error al cargar las PQRSD.');
+      message.error('Error al cargar las PQRSD.', error?.message);
     } finally {
       setLoading(false);
     }
@@ -69,7 +66,7 @@ export const PqrsdList = () => {
     };
 
     try {
-      await axios.put(developUrl + 'pqrsd/' + selectedPqrsd.id, updatedPqrsd);
+      await axios.put(API_URL + 'pqrsd/' + selectedPqrsd.id, updatedPqrsd);
       message.success('PQRSD procesada exitosamente.');
       setIsModalVisible(false);
       getPqrsd();
