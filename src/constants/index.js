@@ -17,4 +17,14 @@ export const TYPE_DOCUMENTS = {
   3: 'Otro',
 };
 
-export const API_URL = localStorage.getItem('debug') == 'true' ? 'http://localhost:3000/api/public/' : 'https://ds2-2024-api-v1ea.onrender.com/api/public/'
+const API_URL = localStorage.getItem('debug') == 'true' ? 'http://localhost:3000/' : 'https://ds2-2024-api-v1ea.onrender.com/';
+
+export const API = {
+  public: API_URL + 'api/public/',
+  private: API_URL + 'api/private/',
+  authHeaders:{
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`
+  },
+}
+
+console.log('API URL: ', API_URL)

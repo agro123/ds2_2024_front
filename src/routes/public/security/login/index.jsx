@@ -5,26 +5,28 @@ import { FaUser, FaLock} from 'react-icons/fa';
 import '../../../../assets/styles/login.css';
 import axios from 'axios';
 import logo from '../../../../../public/logo1.png';
-import { API_URL } from '../../../../constants';
-
+import { API } from '../../../../constants';
+import { useAuth } from '../../../../context/AuthProvider';
+import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
 
 export const LoginView = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const {saveUserData} = useAuth();
 
   const onFinish = async (values) => {
     setLoading(true);
     try {
     
-      const response = await axios.post(API_URL + 'users/login/', {
+      const response = await axios.post(API.public + 'users/login/', {
         username: values.username,
         password: values.password,
       });
 
       message.success('¡Inicio de sesión exitoso!');
-      console.log('Respuesta del servidor:', response.data);
-
-      // window.location.href = '/dashboard';
+      saveUserData(response.data);
+      navigate("/admin/dashboard");
 
     } catch (error) {
       setLoading(false);

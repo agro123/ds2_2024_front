@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Table, message, Button, Modal, Form, Input, Space, Select } from 'antd';
 import axios from 'axios';
-import { API_URL } from '../../../constants';
+import { API } from '../../../constants';
 
 export const UsersList = () => {
   const [users, setUsers] = useState([]);
@@ -39,7 +39,7 @@ export const UsersList = () => {
   const getUsers = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('https://ds2-2024-api-v1ea.onrender.com/api/public/users/');
+      const response = await axios.get(API.private + 'users/',{headers: API.authHeaders});
       setUsers(response.data);
     } catch (error) {
       message.error('Error al cargar los usuarios.',error?.message);
@@ -70,11 +70,11 @@ export const UsersList = () => {
   const handleAddUser = async (values) => {
     const currentDate = new Date().toISOString();
     try {
-      const response = await axios.post(API_URL + 'users/', {
+      const response = await axios.post(API.private + 'users/', {
         ...values,
         created_by: 'Sebastian Rey',
         created_at: currentDate,
-      });
+      },{headers: API.authHeaders});
       setUsers([...users, response.data]);
       message.success('Usuario agregado exitosamente.');
       getUsers()
@@ -99,10 +99,10 @@ export const UsersList = () => {
 
   const handleEditUser = async (values) => {
     try {
-      await axios.put(API_URL + `users/${editingUser.id}`, {
+      await axios.put(API.private + `users/${editingUser.id}`, {
         ...values,
         created_by: values.created_by.label,
-      });
+      },{headers: API.authHeaders});
       getUsers()
       message.success('Usuario actualizado exitosamente.');
       setIsEditModalVisible(false);
@@ -114,7 +114,7 @@ export const UsersList = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-      await axios.delete(API_URL + `users/${userId}`);
+      await axios.delete(API.private + `users/${userId}`,{headers: API.authHeaders});
       getUsers()
       message.success('Usuario eliminado exitosamente.');
     } catch (error) {
