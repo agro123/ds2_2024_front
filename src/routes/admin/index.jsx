@@ -1,17 +1,30 @@
+import { useEffect } from 'react';
 import { Breadcrumb, Layout, theme } from 'antd';
 import { SideBar } from '../../layouts/sidebar';
 import { CustomFooter } from '../../layouts/footer';
 import { Suspense } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { Dashboardview } from './dashboard';
 import { UsersList } from './users';
 import { PqrsdList } from './pqrdsList';
 
-const AdminRouter = () => {
+const authToken = localStorage.getItem('authToken');;
+const AdminRouter = () => {;
+    const navigate = useNavigate();
 
     const { Content, } = Layout;
     const { token: { colorBgContainer, borderRadiusLG }, } = theme.useToken();
 
+    useEffect(() => {
+        if(!authToken){
+            navigate('/login')
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    if(!authToken){
+        return <></>
+    }
 
     return (
 
@@ -53,6 +66,7 @@ const AdminRouter = () => {
                                         <Route path='/dashboard' element={<Dashboardview />} />
                                         <Route path='/users' element={<UsersList />} />
                                         <Route path='/pqrsd' element={<PqrsdList />} />
+                                        <Route path="*" element={<Navigate to="/error" />} />
                                     </Routes>
                                 </div>
                             </div>

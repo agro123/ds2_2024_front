@@ -17,7 +17,7 @@ import {
 } from 'react-icons/fa';
 import '../../../../assets/styles/pqrsd.css';
 import axios from 'axios';
-import { API_URL } from '../../../../constants';
+import { API } from '../../../../constants';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -36,7 +36,7 @@ export const PqrsdView = () => {
   const onFinish = async (values) => {
     values.number_document = parseInt(values.number_document)
     try {
-      await axios.post(API_URL + 'pqrsd/', values);
+      await axios.post(API.public + 'pqrsd/', values);
       message.success('Se ha agregado correctamente.');
       form.resetFields();
     } catch (error) {
