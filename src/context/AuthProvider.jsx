@@ -35,10 +35,10 @@ export const AuthProvider = ({ children }) => {
         let _userData = localStorage.getItem('userData');
         if(_userData){
             _userData = JSON.parse(_userData);
-            saveUserData(_userData);
             axios.get(API.private + `users/${_userData.id}`,{headers: API.authHeaders})
             .then((res) => {
                 console.log('user logged: ', res.status)
+                saveUserData(_userData);
             }).catch((err) => {
                 console.log('user not logged: ', err?.message)
                 clearSavedData()
