@@ -25,7 +25,6 @@ export const LoginView = () => {
       });
 
       message.success('¡Inicio de sesión exitoso!');
-      console.log('Respuesta del servidor:', response.data);
       saveUserData(response.data);
       navigate("/admin/dashboard");
 

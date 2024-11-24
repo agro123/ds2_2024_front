@@ -7,24 +7,22 @@ import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { Dashboardview } from './dashboard';
 import { UsersList } from './users';
 import { PqrsdList } from './pqrdsList';
+import { useAuth } from '../../context/AuthProvider';
 
-const authToken = localStorage.getItem('authToken');;
+const authToken = localStorage.getItem('authToken');
 const AdminRouter = () => {;
     const navigate = useNavigate();
+    const {userData} = useAuth();
 
     const { Content, } = Layout;
     const { token: { colorBgContainer, borderRadiusLG }, } = theme.useToken();
 
     useEffect(() => {
-        if(!authToken){
+        if(!authToken && !userData){
             navigate('/login')
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    if(!authToken){
-        return <></>
-    }
+    }, [userData])
 
     return (
 
