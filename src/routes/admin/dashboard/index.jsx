@@ -4,7 +4,6 @@ import Chart from "react-apexcharts";
 import { API, TYPE_PQRSD_LABELS, STATUS_LABELS } from "../../../constants";
 
 export const Dashboardview = () => {
-  const [pqrsdData, setPqrsdData] = useState([]);
   const [chartData, setChartData] = useState({
     statusChart: {
       series: [],
@@ -28,7 +27,6 @@ export const Dashboardview = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(API.private + 'pqrsd/',{headers: API.authHeaders});
-        setPqrsdData(response.data);
         generateCharts(response.data);
       } catch (error) {
         console.error("Error al traer las PQRSD:", error);
