@@ -1,6 +1,5 @@
-import React from 'react';
 import { Breadcrumb , Tooltip} from 'antd';
-import { HomeOutlined, RightOutlined } from '@ant-design/icons';
+import { RightOutlined } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
 
 // Función para transformar un segmento de ruta en un nombre legible

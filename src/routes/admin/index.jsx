@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Breadcrumb, Layout, theme } from 'antd';
+import { Layout, theme } from 'antd';
 import { SideBar } from '../../layouts/sidebar';
 import { CustomFooter } from '../../layouts/footer';
 import { Suspense } from 'react';
