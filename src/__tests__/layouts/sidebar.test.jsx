@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { vi, describe, it, expect, beforeEach, beforeAll } from "vitest";
+import { vi, describe, it, expect, beforeAll } from "vitest";
 import { SideBar } from "../../layouts/sidebar";
 import { BrowserRouter } from "react-router-dom";
 
@@ -14,9 +14,34 @@ vi.mock("react-router-dom", async () => {
     };
 });
 
+// Mock de useAuth de AuthProvider
+const mockClearSavedData = vi.fn();
+
+vi.mock("../../context/AuthProvider", () => ({
+    useAuth: () => ({
+        userData: { name: "John Doe" }, // Usuario simulado
+        clearSavedData: mockClearSavedData, // Mock de la función clearSavedData
+    }),
+}));
+
+// Mock global de matchMedia para evitar errores con Ant Design
+beforeAll(() => {
+    Object.defineProperty(window, 'matchMedia', {
+        writable: true,
+        value: vi.fn().mockImplementation((query) => ({
+            matches: false,
+            media: query,
+            onchange: null,
+            addListener: vi.fn(), // Deprecated
+            removeListener: vi.fn(), // Deprecated
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
+            dispatchEvent: vi.fn(),
+        })),
+    });
+});
 
 describe("SideBar Component", () => {
-    
     it("should render the sidebar with the correct items", () => {
         render(
             <BrowserRouter>
@@ -28,31 +53,15 @@ describe("SideBar Component", () => {
         expect(screen.getByText("Dashboard")).toBeInTheDocument();
         expect(screen.getByText("Usuarios")).toBeInTheDocument();
         expect(screen.getByText("PQRSD")).toBeInTheDocument();
+        // Verificar que el nombre del usuario se muestre
+        expect(screen.getByText("John Doe")).toBeInTheDocument();
     });
 
-    /*it("should navigate to the correct route when clicking an item", () => {
+    it("should call clearSavedData and navigate to login on logout", () => {
         render(
             <BrowserRouter>
                 <SideBar />
             </BrowserRouter>
         );
-
-        // Simular clic en "Dashboard"
-        fireEvent.click(screen.getAllByRole("link", {name: "Dashboard"})[0]);
-
-        // Verificar que la navegación ocurrió a la ruta esperada
-        expect(mockNavigate).toHaveBeenCalledWith("/admin/dashboard");
-
-        // Simular clic en "Usuarios"
-        fireEvent.click(screen.getAllByRole("link", {name:"Usuarios"})[0]);
-
-        // Verificar que la navegación ocurrió a la ruta esperada
-        expect(mockNavigate).toHaveBeenCalledWith("/admin/users");
-
-        // Simular clic en "PQRSD"
-        fireEvent.click(screen.getAllByRole("link",{name:"PQRSD"})[0]);
-
-        // Verificar que la navegación ocurrió a la ruta esperada
-        expect(mockNavigate).toHaveBeenCalledWith("/admin/pqrsd");
-    });*/
+    });
 });

@@ -61,6 +61,7 @@ export const SideBar = () => {
                             <Button
                                 type="text"
                                 icon={<LogoutOutlined />}
+                                aria-label="Salir"
                                 style={{
                                     width: '50%',
                                     display: 'flex',
