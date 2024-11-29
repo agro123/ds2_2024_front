@@ -16,3 +16,15 @@ export const TYPE_DOCUMENTS = {
   2: 'Pasaporte',
   3: 'Otro',
 };
+
+const API_URL = localStorage.getItem('debug') == 'true' ? 'http://localhost:3000/' : 'https://ds2-2024-api-v1ea.onrender.com/';
+
+export const API = {
+  public: API_URL + 'api/public/',
+  private: API_URL + 'api/private/',
+  authHeaders:{
+    Authorization: `Bearer ${localStorage.getItem('authToken')}`
+  },
+}
+
+console.log('API URL: ', API_URL)
