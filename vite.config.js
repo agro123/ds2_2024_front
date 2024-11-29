@@ -9,6 +9,13 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/__tests__/vitest-setup.js'],
     coverage: {
+      include: [
+        '**/src/routes/admin/dashboard/index.jsx',
+        '**/src/routes/admin/pqrdsList/index.jsx',
+        '**/src/routes/admin/users/index.jsx',
+        '**/src/routes/public/security/login/index.jsx',
+        '**/src/routes/public/security/pqrsd/index.jsx',
+      ],
       exclude: [
         '**/src/main.jsx',
         '**/src/constants',
