@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Breadcrumb, Layout, theme } from 'antd';
+import { Layout, theme } from 'antd';
 import { SideBar } from '../../layouts/sidebar';
 import { CustomFooter } from '../../layouts/footer';
 import { Suspense } from 'react';
@@ -8,6 +8,7 @@ import { Dashboardview } from './dashboard';
 import { UsersList } from './users';
 import { PqrsdList } from './pqrdsList';
 import { useAuth } from '../../context/AuthProvider';
+import BreadCrumb from '../../components/breadCrumb/indes';
 
 const authToken = localStorage.getItem('authToken');
 const AdminRouter = () => {;
@@ -38,7 +39,7 @@ const AdminRouter = () => {;
                         margin: '0 16px',
                     }}
                 >
-                    {/* CREAR COMPONENTE DE TIPO BREADCRUMB FUNCIONAL DE ACUERDO A LAS RUTAS */}
+                    {/* CREAR COMPONENTE DE TIPO BREADCRUMB FUNCIONAL DE ACUERDO A LAS RUTAS 
                     <Breadcrumb
                         style={{
                             margin: '16px 0',
@@ -47,6 +48,8 @@ const AdminRouter = () => {;
                         <Breadcrumb.Item>Admin</Breadcrumb.Item>
                         <Breadcrumb.Item>Bill</Breadcrumb.Item>
                     </Breadcrumb>
+                    */}
+                    <BreadCrumb />
                     <div
                         style={{
                             padding: 24,
